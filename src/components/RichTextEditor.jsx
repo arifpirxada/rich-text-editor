@@ -8,8 +8,20 @@ import { Controls } from './Controls'
 
 const initialValue = [
     {
+        type: 'heading',
+        children: [{ text: 'Heading' }],
+    },
+    {
+        type: 'heading-2',
+        children: [{ text: 'Heading 2' }],
+    },
+    {
+        type: 'heading-3',
+        children: [{ text: 'Heading 3\n' }],
+    },
+    {
         type: 'paragraph',
-        children: [{ text: 'Type Here...' }],
+        children: [{ text: 'Paragraph...\n' }],
     },
     {
         type: 'bullet-list',
