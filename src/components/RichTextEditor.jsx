@@ -53,6 +53,7 @@ const RichTextEditor = () => {
             <Controls editor={ editor } />
             <Slate editor={ editor } initialValue={ initialValue } >
                 <Editable
+                    className='border-2 border-gray-300 p-4 rounded outline-none'
                     renderElement={ renderElementCb }
                     onKeyDown={ handleKeyDown }
                 />
