@@ -1,18 +1,18 @@
 const Heading = (props) => {
     return (
-        <h1 className="text-3xl" { ...props.attributes }>{ props.children }</h1>
+        <h1 className="text-3xl" style={ { textAlign: props.element.align || 'left' } } { ...props.attributes }>{ props.children }</h1>
     )
 }
 
 const Heading2 = (props) => {
     return (
-        <h1 className="text-2xl" { ...props.attributes }>{ props.children }</h1>
+        <h2 className="text-2xl" style={ { textAlign: props.element.align || 'left' } } { ...props.attributes }>{ props.children }</h2>
     )
 }
 
 const Heading3 = (props) => {
     return (
-        <h1 className="text-xl" { ...props.attributes }>{ props.children }</h1>
+        <h3 className="text-xl" style={ { textAlign: props.element.align || 'left' } } { ...props.attributes }>{ props.children }</h3>
     )
 }
 

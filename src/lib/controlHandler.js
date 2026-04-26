@@ -1,4 +1,4 @@
-import { Transforms, Editor } from 'slate';
+import { Transforms, Editor, Element } from 'slate';
 
 class ControlHandler {
     // Insert Nodes
@@ -80,6 +80,16 @@ class ControlHandler {
     static toggleMark = (editor, mark) => {
         const isActive = Editor.marks(editor)?.[mark] === true;
         isActive ? Editor.removeMark(editor, mark) : Editor.addMark(editor, mark, true);
+    };
+
+    // Alignment
+
+    static toggleAlign = (editor, alignment) => {
+        Transforms.setNodes(
+            editor,
+            { align: alignment },
+            { match: (n) => Element.isElement(n) && Editor.isBlock(editor, n) }
+        );
     };
 }
 

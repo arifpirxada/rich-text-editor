@@ -1,15 +1,16 @@
 import { useState, useCallback } from "react";
+import { Editor, Element } from "slate";
 import { ICON } from "../utils/icons";
 import ControlHandler from "../lib/controlHandler";
 
 
-const ToolbarButton = ({ icon: Icon, label, active, onClick, disabled }) => (
+const ToolbarButton = ({ icon: Icon, label, active, onMouseDown, disabled }) => (
     <button
         type="button"
         aria-label={ label }
         aria-pressed={ active }
         disabled={ disabled }
-        onClick={ onClick }
+        onMouseDown={ onMouseDown }
         title={ label }
         className={ [
             "flex items-center justify-center w-8 h-8 rounded-lg border transition-all duration-100",
@@ -65,8 +66,6 @@ const Controls = ({ editor }) => {
         }
     }
 
-    const isActive = (format) => activeFormats.has(format);
-
     return (
         <div
             role="toolbar"
@@ -88,39 +87,39 @@ const Controls = ({ editor }) => {
             <Divider />
 
             {/* Inline formatting */ }
-            <ToolbarButton icon={ ICON.Bold } label="Bold" onClick={ () => ControlHandler.toggleMark(editor, 'bold') } />
-            <ToolbarButton icon={ ICON.Italic } label="Italic" onClick={ () => ControlHandler.toggleMark(editor, 'italic') } />
-            <ToolbarButton icon={ ICON.Underline } label="Underline" onClick={ () => ControlHandler.toggleMark(editor, 'underline') } />
-            <ToolbarButton icon={ ICON.Strikethrough } label="Strikethrough" onClick={ () => ControlHandler.toggleMark(editor, 'strikethrough') } />
+            <ToolbarButton icon={ ICON.Bold } label="Bold" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.toggleMark(editor, 'bold') } } />
+            <ToolbarButton icon={ ICON.Italic } label="Italic" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.toggleMark(editor, 'italic') } } />
+            <ToolbarButton icon={ ICON.Underline } label="Underline" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.toggleMark(editor, 'underline') } } />
+            <ToolbarButton icon={ ICON.Strikethrough } label="Strikethrough" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.toggleMark(editor, 'strikethrough') } } />
 
             <Divider />
 
             {/* Lists */ }
-            <ToolbarButton icon={ ICON.BulletList } label="Bullet list" onClick={ () => { ControlHandler.insertBulletList(editor) } } />
-            <ToolbarButton icon={ ICON.NumberList } label="Numbered list" onClick={ () => { ControlHandler.insertOrderedList(editor) } } />
-            <ToolbarButton icon={ ICON.Checklist } label="Checklist" onClick={ () => { ControlHandler.insertCheckList(editor) } } />
+            <ToolbarButton icon={ ICON.BulletList } label="Bullet list" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.insertBulletList(editor) } } />
+            <ToolbarButton icon={ ICON.NumberList } label="Numbered list" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.insertOrderedList(editor) } } />
+            <ToolbarButton icon={ ICON.Checklist } label="Checklist" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.insertCheckList(editor) } } />
 
             <Divider />
 
             {/* Alignment */ }
-            <ToolbarButton icon={ ICON.AlignLeft } label="Align left" active={ isActive("left") } onClick={ () => toggle("left") } />
-            <ToolbarButton icon={ ICON.AlignCenter } label="Align center" active={ isActive("center") } onClick={ () => toggle("center") } />
-            <ToolbarButton icon={ ICON.AlignRight } label="Align right" active={ isActive("right") } onClick={ () => toggle("right") } />
+            <ToolbarButton icon={ ICON.AlignLeft } label="Align left" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.toggleAlign(editor, 'left') } } />
+            <ToolbarButton icon={ ICON.AlignCenter } label="Align center" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.toggleAlign(editor, 'center') } } />
+            <ToolbarButton icon={ ICON.AlignRight } label="Align right" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.toggleAlign(editor, 'right') } } />
 
             <Divider />
 
             {/* Blocks */ }
-            <ToolbarButton icon={ ICON.Blockquote } label="Blockquote" active={ isActive("blockquote") } onClick={ () => ControlHandler.insertBlockQuote(editor) } />
-            <ToolbarButton icon={ ICON.Code } label="Code block" active={ isActive("code") } onClick={ () => ControlHandler.insertCode(editor) } />
+            <ToolbarButton icon={ ICON.Blockquote } label="Blockquote" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.insertBlockQuote(editor) } } />
+            <ToolbarButton icon={ ICON.Code } label="Code block" onMouseDown={ (e) => { e.preventDefault(); ControlHandler.insertCode(editor) } } />
 
             {/* Insert */ }
-            <ToolbarButton icon={ ICON.Link } label="Insert link" active={ false } onClick={ () => ControlHandler.insertLink(editor) } />
+            <ToolbarButton icon={ ICON.Link } label="Insert link" active={ false } onMouseDown={ (e) => { e.preventDefault(); ControlHandler.insertLink(editor) } } />
 
             <Divider />
 
             {/* History */ }
-            <ToolbarButton icon={ ICON.Undo } label="Undo" active={ false } onClick={ (e) => { e.preventDefault(); editor.undo(); } } />
-            <ToolbarButton icon={ ICON.Redo } label="Redo" active={ false } onClick={ (e) => { e.preventDefault(); editor.redo(); } } />
+            <ToolbarButton icon={ ICON.Undo } label="Undo" active={ false } onMouseDown={ (e) => { e.preventDefault(); editor.undo(); } } />
+            <ToolbarButton icon={ ICON.Redo } label="Redo" active={ false } onMouseDown={ (e) => { e.preventDefault(); editor.redo(); } } />
         </div>
     );
 };

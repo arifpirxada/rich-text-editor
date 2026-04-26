@@ -7,7 +7,7 @@ const LinkElement = (props) => {
     };
 
     return (
-        <a href={ props.element.url } { ...props.attriburtes }
+        <a href={ props.element.url } { ...props.attributes }
             className="text-blue-500"
             target="_blank"
             rel="noreferrer"

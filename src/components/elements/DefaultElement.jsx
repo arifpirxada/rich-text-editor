@@ -1,5 +1,5 @@
 const DefaultElement = props => (
-    <p { ...props.attributes }>{ props.children }</p>
+    <p { ...props.attributes } style={ { textAlign: props.element.align || 'left' } }>{ props.children }</p>
 )
 
 export { DefaultElement }
