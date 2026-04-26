@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+
 import { createEditor } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
+import { withHistory } from 'slate-history';
+
 import handleKeyDown from '../lib/handleKeyDown'
 import { renderElement } from './RenderElement'
-import { useCallback } from 'react'
 import { Controls } from './Controls'
 
 const initialValue = [
@@ -89,7 +91,7 @@ const initialValue = [
 ]
 
 const RichTextEditor = () => {
-    const [editor] = useState(() => withReact(createEditor()));
+    const [editor] = useState(() => withHistory(withReact(createEditor())));
 
     const renderElementCb = useCallback(renderElement, [])
 

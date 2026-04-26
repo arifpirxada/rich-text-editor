@@ -28,6 +28,16 @@ const handleKeyDown = (event, editor) => {
             editor.insertText("    ");
             return;
         }
+    } else if ((event.ctrlKey || event.metaKey) && event.key == 'z') {
+        event.preventDefault();
+        if (event.shiftKey) {
+            editor.redo();
+        } else {
+            editor.undo();
+        }
+    } else if ((event.ctrlKey || event.metaKey) && event.key == 'y') {
+        event.preventDefault();
+        editor.redo();
     }
 }
 

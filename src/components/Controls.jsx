@@ -107,8 +107,8 @@ const Controls = ({ editor, onAction }) => {
             <Divider />
 
             {/* History */ }
-            <ToolbarButton icon={ ICON.Undo } label="Undo" active={ false } onClick={ () => onAction?.({ type: "history", action: "undo" }) } />
-            <ToolbarButton icon={ ICON.Redo } label="Redo" active={ false } onClick={ () => onAction?.({ type: "history", action: "redo" }) } />
+            <ToolbarButton icon={ ICON.Undo } label="Undo" active={ false } onClick={ (e) => { e.preventDefault(); editor.undo(); } } />
+            <ToolbarButton icon={ ICON.Redo } label="Redo" active={ false } onClick={ (e) => { e.preventDefault(); editor.redo(); } } />
         </div>
     );
 };
