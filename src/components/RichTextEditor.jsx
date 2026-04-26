@@ -8,6 +8,7 @@ import handleKeyDown from '../lib/handleKeyDown'
 import { renderElement } from './render/RenderElement'
 import { Controls } from './Controls'
 import { renderLeaf } from './render/RenderLeaf';
+import { useEffect } from 'react';
 
 const initialValue = [
     {
@@ -99,17 +100,39 @@ const RichTextEditor = () => {
     const [editor] = useState(() => withHistory(withReact(createEditor())));
 
     const renderElementCb = useCallback(renderElement, []);
-
     const renderLeafCb = useCallback(renderLeaf, []);
+
+    const getSavedValue = () => {
+        const saved = localStorage.getItem("rich-content");
+        if (!saved) return initialValue;
+        try {
+            const parsed = JSON.parse(saved);
+            return parsed || initialValue;
+        } catch (e) {
+            console.error("Could not load saved content");
+            return initialValue;
+        }
+    };
+
+    const handleOnChange = (newValue) => {
+        // Save to localStorage
+        const isAstChange = editor.operations.some(
+            op => op.type !== 'set_selection'
+        );
+
+        if (isAstChange) {
+            localStorage.setItem("rich-content", JSON.stringify(newValue));
+        }
+    }
 
     return (
         <>
             <Controls editor={ editor } />
-            <Slate editor={ editor } initialValue={ initialValue } >
+            <Slate editor={ editor } initialValue={ getSavedValue() } onChange={ handleOnChange } >
                 <Editable
                     className='border-2 border-gray-300 p-4 rounded outline-none'
                     renderElement={ renderElementCb }
-                    renderLeaf={ renderLeaf }
+                    renderLeaf={ renderLeafCb }
                     onKeyDown={ (event) => handleKeyDown(event, editor) }
                 />
             </Slate>
