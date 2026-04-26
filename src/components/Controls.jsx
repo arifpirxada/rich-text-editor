@@ -29,7 +29,7 @@ const Divider = () => (
     <div className="w-px h-5 bg-neutral-200 dark:bg-neutral-700 mx-1 shrink-0" />
 );
 
-const Controls = ({ editor, onAction }) => {
+const Controls = ({ editor }) => {
     const [activeFormats, setActiveFormats] = useState(new Set());
     const [blockType, setBlockType] = useState("paragraph");
 
@@ -40,18 +40,13 @@ const Controls = ({ editor, onAction }) => {
                 next.has(format) ? next.delete(format) : next.add(format);
                 return next;
             });
-            onAction?.({ type: "format", format });
         },
-        [onAction]
+        []
     );
 
-    const handleBlockType = useCallback(
-        (e) => {
-            setBlockType(e.target.value);
-            onAction?.({ type: "block", blockType: e.target.value });
-        },
-        [onAction]
-    );
+    const handleBlockType = (e) => {
+        setBlockType(e.target.value);
+    }
 
     const isActive = (format) => activeFormats.has(format);
 
@@ -102,7 +97,7 @@ const Controls = ({ editor, onAction }) => {
             <ToolbarButton icon={ ICON.Code } label="Code block" active={ isActive("code") } onClick={ () => toggle("code") } />
 
             {/* Insert */ }
-            <ToolbarButton icon={ ICON.Link } label="Insert link" active={ false } onClick={ () => onAction?.({ type: "insert", item: "link" }) } />
+            <ToolbarButton icon={ ICON.Link } label="Insert link" active={ false } />
 
             <Divider />
 
