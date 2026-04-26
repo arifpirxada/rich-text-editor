@@ -88,7 +88,10 @@ class ControlHandler {
         Transforms.setNodes(
             editor,
             { align: alignment },
-            { match: (n) => Element.isElement(n) && Editor.isBlock(editor, n) }
+            {
+                match: (n) => Element.isElement(n) && Editor.isBlock(editor, n) && !Editor.isInline(editor, n),
+                mode: 'highest'
+            }
         );
     };
 }

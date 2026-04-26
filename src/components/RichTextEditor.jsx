@@ -97,7 +97,23 @@ const initialValue = [
 ]
 
 const RichTextEditor = () => {
-    const [editor] = useState(() => withHistory(withReact(createEditor())));
+    const [editor] = useState(() => {
+        const e = withHistory(withReact(createEditor()));
+
+        const { normalizeNode } = e;
+
+        // normalizeNode
+        e.normalizeNode = ([node, path]) => {
+            if (Element.isElement(node) && e.isInline(node) && node.align) {
+                Transforms.unsetNodes(e, 'align', { at: path });
+                return;
+            }
+
+            normalizeNode([node, path]);
+        };
+
+        return e;
+    });
 
     const renderElementCb = useCallback(renderElement, []);
     const renderLeafCb = useCallback(renderLeaf, []);
