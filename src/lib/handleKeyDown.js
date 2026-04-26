@@ -1,12 +1,31 @@
 import { Editor } from "slate";
+import ControlHandler from "./controlHandler";
 
 const handleKeyDown = (event, editor) => {
-    if (event.ctrlKey && event.key.toLowerCase() == 'b') {
+    if (event.ctrlKey && event.key.toLowerCase() == '/') {
         event.preventDefault();
-        console.log("bold");
+        const shortcuts = [
+            "Ctrl + /             View shortcuts",
+            "Ctrl + B             Bold",
+            "Ctrl + I             Italic",
+            "Ctrl + U             Underline",
+            "Ctrl + Z             Undo",
+            "Ctrl + Shift + Z     Redo",
+            "Ctrl + Y             Redo",
+            "Tab                  Indent (in code block)",
+            "Enter                New line (in code block)",
+        ].join("\n");
+        alert(shortcuts);
+
+    } else if (event.ctrlKey && event.key.toLowerCase() == 'b') {
+        event.preventDefault();
+        ControlHandler.toggleMark(editor, 'bold');
     } else if (event.ctrlKey && event.key.toLowerCase() == 'i') {
         event.preventDefault();
-        console.log("italic");
+        ControlHandler.toggleMark(editor, 'italic');
+    } else if (event.ctrlKey && event.key.toLowerCase() == 'u') {
+        event.preventDefault();
+        ControlHandler.toggleMark(editor, 'underline');
     } else if (event.key == "Enter") {
         // For code block
         const [match] = Editor.nodes(editor, {

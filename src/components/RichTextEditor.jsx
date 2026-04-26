@@ -10,6 +10,10 @@ import { Controls } from './Controls'
 
 const initialValue = [
     {
+        type: 'blockquote',
+        children: [{ text: 'Use ctrl + / to view shortcuts' }],
+    },
+    {
         type: 'heading',
         children: [{ text: 'Heading' }],
     },
