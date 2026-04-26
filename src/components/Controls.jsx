@@ -46,6 +46,23 @@ const Controls = ({ editor }) => {
 
     const handleBlockType = (e) => {
         setBlockType(e.target.value);
+
+        switch (e.target.value) {
+            case 'paragraph':
+                ControlHandler.insertParagraph(editor);
+                break;
+            case 'h1':
+                ControlHandler.insertHeading(editor, 1);
+                break;
+            case 'h2':
+                ControlHandler.insertHeading(editor, 2);
+                break;
+            case 'h3':
+                ControlHandler.insertHeading(editor, 3);
+                break;
+            default:
+                break;
+        }
     }
 
     const isActive = (format) => activeFormats.has(format);
@@ -79,9 +96,9 @@ const Controls = ({ editor }) => {
             <Divider />
 
             {/* Lists */ }
-            <ToolbarButton icon={ ICON.BulletList } label="Bullet list" active={ isActive("bullet") } onClick={ () => { toggle("bullet"); ControlHandler.insertBulletList(editor) } } />
-            <ToolbarButton icon={ ICON.NumberList } label="Numbered list" active={ isActive("ordered") } onClick={ () => toggle("ordered") } />
-            <ToolbarButton icon={ ICON.Checklist } label="Checklist" active={ isActive("checklist") } onClick={ () => toggle("checklist") } />
+            <ToolbarButton icon={ ICON.BulletList } label="Bullet list" onClick={ () => { ControlHandler.insertBulletList(editor) } } />
+            <ToolbarButton icon={ ICON.NumberList } label="Numbered list" onClick={ () => { ControlHandler.insertOrderedList(editor) } } />
+            <ToolbarButton icon={ ICON.Checklist } label="Checklist" onClick={ () => { ControlHandler.insertCheckList(editor) } } />
 
             <Divider />
 
@@ -93,11 +110,11 @@ const Controls = ({ editor }) => {
             <Divider />
 
             {/* Blocks */ }
-            <ToolbarButton icon={ ICON.Blockquote } label="Blockquote" active={ isActive("blockquote") } onClick={ () => toggle("blockquote") } />
-            <ToolbarButton icon={ ICON.Code } label="Code block" active={ isActive("code") } onClick={ () => toggle("code") } />
+            <ToolbarButton icon={ ICON.Blockquote } label="Blockquote" active={ isActive("blockquote") } onClick={ () => ControlHandler.insertBlockQuote(editor) } />
+            <ToolbarButton icon={ ICON.Code } label="Code block" active={ isActive("code") } onClick={ () => ControlHandler.insertCode(editor) } />
 
             {/* Insert */ }
-            <ToolbarButton icon={ ICON.Link } label="Insert link" active={ false } />
+            <ToolbarButton icon={ ICON.Link } label="Insert link" active={ false } onClick={ () => ControlHandler.insertLink(editor) } />
 
             <Divider />
 
