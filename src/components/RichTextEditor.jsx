@@ -40,7 +40,52 @@ const initialValue = [
                 children: [{ text: 'I am ordered list Item' }]
             }
         ]
-    }
+    },
+    {
+        type: 'check-list',
+        children: [
+            {
+                type: 'check-list-item',
+                checked: true,
+                id: "item-1",
+                children: [{ text: 'I am check list Item' }]
+            },
+            {
+                type: 'check-list-item',
+                checked: false,
+                id: "item-2",
+                children: [{ text: 'I am check list Item 2' }]
+            }
+        ]
+    },
+    {
+        type: 'blockquote',
+        children: [{ text: 'This is a quote ...' }],
+    },
+    {
+        type: 'code',
+        children: [{ text: 'let a = 3;' }],
+    },
+    {
+        type: 'link-element',
+        url: "https://www.google.com/",
+        children: [{ text: 'Google' }],
+    },
+    {
+        type: 'paragraph',
+        children: [
+            { text: 'Checkout Google: ' },
+            {
+                type: 'link-element',
+                url: "https://www.google.com/",
+                children: [{ text: 'Google' }],
+            },
+        ],
+    },
+    {
+        type: 'paragraph',
+        children: [{ text: 'Type Here ...\n' }],
+    },
 ]
 
 const RichTextEditor = () => {
@@ -55,7 +100,7 @@ const RichTextEditor = () => {
                 <Editable
                     className='border-2 border-gray-300 p-4 rounded outline-none'
                     renderElement={ renderElementCb }
-                    onKeyDown={ handleKeyDown }
+                    onKeyDown={ (event) => handleKeyDown(event, editor) }
                 />
             </Slate>
         </>

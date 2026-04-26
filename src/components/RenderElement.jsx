@@ -1,6 +1,10 @@
+import { Blockquote } from './elements/Blockquote'
 import { BulletList, ListItem } from './elements/BulletList'
+import { CheckList, CheckListItem } from './elements/CheckList'
+import { Code } from './elements/Code'
 import { DefaultElement } from './elements/DefaultElement'
 import { Heading, Heading2, Heading3 } from './elements/Headings'
+import { LinkElement } from './elements/LinkElement'
 
 const renderElement = props => {
     switch (props.element.type) {
@@ -18,6 +22,16 @@ const renderElement = props => {
             return <BulletList ordered={ true} { ...props } />
         case 'ordered-list-item':
             return <ListItem { ...props } />
+        case 'check-list':
+            return <CheckList { ...props } />
+        case 'check-list-item':
+            return <CheckListItem { ...props } />
+        case 'blockquote':
+            return <Blockquote { ...props } />
+        case 'code':
+            return <Code { ...props } />
+        case 'link-element':
+            return <LinkElement { ...props } />
         default:
             return <DefaultElement { ...props } />
     }
