@@ -88,10 +88,10 @@ const Controls = ({ editor }) => {
             <Divider />
 
             {/* Inline formatting */ }
-            <ToolbarButton icon={ ICON.Bold } label="Bold" active={ isActive("bold") } onClick={ () => toggle("bold") } />
-            <ToolbarButton icon={ ICON.Italic } label="Italic" active={ isActive("italic") } onClick={ () => toggle("italic") } />
-            <ToolbarButton icon={ ICON.Underline } label="Underline" active={ isActive("underline") } onClick={ () => toggle("underline") } />
-            <ToolbarButton icon={ ICON.Strikethrough } label="Strikethrough" active={ isActive("strikethrough") } onClick={ () => toggle("strikethrough") } />
+            <ToolbarButton icon={ ICON.Bold } label="Bold" onClick={ () => ControlHandler.toggleMark(editor, 'bold') } />
+            <ToolbarButton icon={ ICON.Italic } label="Italic" onClick={ () => ControlHandler.toggleMark(editor, 'italic') } />
+            <ToolbarButton icon={ ICON.Underline } label="Underline" onClick={ () => ControlHandler.toggleMark(editor, 'underline') } />
+            <ToolbarButton icon={ ICON.Strikethrough } label="Strikethrough" onClick={ () => ControlHandler.toggleMark(editor, 'strikethrough') } />
 
             <Divider />
 

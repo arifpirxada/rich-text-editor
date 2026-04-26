@@ -93,7 +93,15 @@ const initialValue = [
 const RichTextEditor = () => {
     const [editor] = useState(() => withHistory(withReact(createEditor())));
 
-    const renderElementCb = useCallback(renderElement, [])
+    const renderElementCb = useCallback(renderElement, []);
+
+    const renderLeaf = useCallback(({ attributes, children, leaf }) => {
+        if (leaf.bold) children = <strong>{ children }</strong>;
+        if (leaf.italic) children = <em>{ children }</em>;
+        if (leaf.underline) children = <u>{ children }</u>;
+        if (leaf.strikethrough) children = <s>{ children }</s>;
+        return <span { ...attributes }>{ children }</span>;
+    }, []);
 
     return (
         <>
@@ -102,6 +110,7 @@ const RichTextEditor = () => {
                 <Editable
                     className='border-2 border-gray-300 p-4 rounded outline-none'
                     renderElement={ renderElementCb }
+                    renderLeaf={ renderLeaf }
                     onKeyDown={ (event) => handleKeyDown(event, editor) }
                 />
             </Slate>

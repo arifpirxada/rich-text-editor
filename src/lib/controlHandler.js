@@ -1,6 +1,7 @@
-import { Transforms } from 'slate';
+import { Transforms, Editor } from 'slate';
 
 class ControlHandler {
+    // Insert Nodes
     static insertParagraph = editor => {
         Transforms.insertNodes(editor, {
             type: 'paragraph',
@@ -73,6 +74,13 @@ class ControlHandler {
             children: [{ text: t }]
         })
     }
+
+    // Bold, Italic, Strike
+
+    static toggleMark = (editor, mark) => {
+        const isActive = Editor.marks(editor)?.[mark] === true;
+        isActive ? Editor.removeMark(editor, mark) : Editor.addMark(editor, mark, true);
+    };
 }
 
 export { ControlHandler as default }
