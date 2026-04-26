@@ -5,8 +5,9 @@ import { Slate, Editable, withReact } from 'slate-react'
 import { withHistory } from 'slate-history';
 
 import handleKeyDown from '../lib/handleKeyDown'
-import { renderElement } from './RenderElement'
+import { renderElement } from './render/RenderElement'
 import { Controls } from './Controls'
+import { renderLeaf } from './render/RenderLeaf';
 
 const initialValue = [
     {
@@ -99,13 +100,7 @@ const RichTextEditor = () => {
 
     const renderElementCb = useCallback(renderElement, []);
 
-    const renderLeaf = useCallback(({ attributes, children, leaf }) => {
-        if (leaf.bold) children = <strong>{ children }</strong>;
-        if (leaf.italic) children = <em>{ children }</em>;
-        if (leaf.underline) children = <u>{ children }</u>;
-        if (leaf.strikethrough) children = <s>{ children }</s>;
-        return <span { ...attributes }>{ children }</span>;
-    }, []);
+    const renderLeafCb = useCallback(renderLeaf, []);
 
     return (
         <>

@@ -1,10 +1,10 @@
-import { Blockquote } from './elements/Blockquote'
-import { BulletList, ListItem } from './elements/BulletList'
-import { CheckList, CheckListItem } from './elements/CheckList'
-import { Code } from './elements/Code'
-import { DefaultElement } from './elements/DefaultElement'
-import { Heading, Heading2, Heading3 } from './elements/Headings'
-import { LinkElement } from './elements/LinkElement'
+import { Blockquote } from '../elements/Blockquote'
+import { BulletList, ListItem } from '../elements/BulletList'
+import { CheckList, CheckListItem } from '../elements/CheckList'
+import { Code } from '../elements/Code'
+import { DefaultElement } from '../elements/DefaultElement'
+import { Heading, Heading2, Heading3 } from '../elements/Headings'
+import { LinkElement } from '../elements/LinkElement'
 
 const renderElement = props => {
     switch (props.element.type) {
